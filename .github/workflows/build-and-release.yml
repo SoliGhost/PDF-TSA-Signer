@@ -73,9 +73,10 @@ jobs:
             Write-Error 'Extracted changelog entry is empty.'
             exit 1
           }
-          Add-Content -Path $env:GITHUB_OUTPUT -Value "release_body<<'EOF'"
+          $delimiter = "EOF_$([Guid]::NewGuid().ToString('N'))"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value "release_body<<$delimiter"
           Add-Content -Path $env:GITHUB_OUTPUT -Value $body
-          Add-Content -Path $env:GITHUB_OUTPUT -Value "EOF"
+          Add-Content -Path $env:GITHUB_OUTPUT -Value $delimiter
 
       - name: Create draft GitHub Release and upload executable
         uses: softprops/action-gh-release@v1
