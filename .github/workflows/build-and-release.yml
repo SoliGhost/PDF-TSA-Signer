@@ -34,6 +34,8 @@ jobs:
 
       - name: Determine version
         shell: powershell
+        env:
+          INPUT_VERSION: ${{ github.event.inputs.version }}
         run: |
           if (-not $env:INPUT_VERSION -or $env:INPUT_VERSION -eq '') {
             Write-Error 'The version input is required.'
