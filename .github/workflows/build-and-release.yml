@@ -10,6 +10,9 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
+permissions:
+  contents: write
+
 jobs:
   build:
     name: Build Windows executable and publish Release
@@ -79,7 +82,7 @@ jobs:
           Add-Content -Path $env:GITHUB_OUTPUT -Value $delimiter
 
       - name: Create draft GitHub Release and upload executable
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ env.VERSION }}
           name: PDF_TSA_Signer-${{ env.VERSION }}
